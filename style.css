@@ -1,0 +1,138 @@
+:root {
+  /* Colors */
+  --clr-main-bg: #5a1e76;
+  --clr-board-bg: #2b0040;
+  --clr-cell-bg: #43115b;
+  --clr-player-x: #48d2fe;
+  --clr-draw: #bcdbf9;
+  --clr-player-o: #e2be00;
+  --clr-newgame: #f4f6f5;
+  --clr-text: #000000; /* Changed to white for better contrast */
+  /* Font Family */
+  --ff-main: "Fredoka", sans-serif;
+  /* Font Size */
+  --fs-regular: 1.25rem;
+  /* Font Weight */
+  --fw-medium: 500;
+}
+
+body {
+  font-family: var(--ff-main);
+  font-weight: 400;
+  background-color: var(--clr-main-bg);
+  color: var(--clr-text);
+  display: grid;
+  place-items: center;
+  min-height: 100svh; /* Changed to vh for better compatibility */
+  margin: 0; /* Added to remove default margin */
+}
+
+/* Main Container */
+.container {
+  background-color: var(--clr-board-bg);
+  border-radius: 10px; /* Added for a rounded container */
+  padding: 1rem; /* Added padding */
+  display: grid;
+  gap: 1rem; /* Added gap between sections */
+  align-items: center; /* Centered content */
+  min-width: 22rem;
+}
+.board-wrapper {
+  display: grid;
+  margin: 1rem;
+  gap: 1.25rem;
+}
+
+/* Score Board */
+.board-score ul {
+  display: grid;
+  gap: 0.5rem;
+  width: 100%;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  /* aspect-ratio: 4; */
+
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.score {
+  border-radius: 5px;
+  padding: 0.5rem;
+  background-color: var(--clr-cell-bg);
+  color: var(--clr-text);
+  text-align: center;
+}
+.score-x {
+  background-color: var(--clr-player-x);
+}
+.score-draw {
+  background-color: var(--clr-draw);
+}
+.score-o {
+  background-color: var(--clr-player-o);
+}
+
+/* Game Board */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.5rem;
+  width: 75%;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.grid-item {
+  background-color: var(--clr-cell-bg);
+  border-radius: 10px;
+  display: flex; /* Center content inside cells */
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem; /* Increased font size for better visibility */
+  color: var(--clr-text);
+  cursor: pointer; /* Added pointer cursor */
+  transition: background-color 0.3s;
+}
+
+.grid-item:hover {
+  background-color: var(--clr-player-x);
+}
+
+/* Buttons */
+.button {
+  background-color: var(--clr-newgame);
+  border: none;
+  border-radius: 5px;
+  color: var(--clr-text);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: var(--fs-regular);
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: var(--clr-player-o);
+}
+
+.newgame {
+  text-align: center;
+  font-weight: bold;
+}
+
+.player-turn {
+  background-color: #48d2fe;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+}
+
+li {
+  list-style-type: none;
+}
