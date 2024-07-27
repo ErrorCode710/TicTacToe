@@ -88,18 +88,21 @@ body {
 .grid-item {
   background-color: var(--clr-cell-bg);
   border-radius: 10px;
-  display: flex; /* Center content inside cells */
+  display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem; /* Increased font size for better visibility */
+  font-size: 2rem;
   color: var(--clr-text);
-  cursor: pointer; /* Added pointer cursor */
+  cursor: pointer;
   transition: background-color 0.3s;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.grid-item:hover {
+/* .grid-item:hover {
   background-color: var(--clr-player-x);
-}
+} */
 
 /* Buttons */
 .button {
@@ -124,8 +127,7 @@ body {
 
 .player-turn {
   background-color: #48d2fe;
-  visibility: hidden;
-  opacity: 0;
+
   display: flex;
   text-align: center;
   justify-content: center;
@@ -135,4 +137,12 @@ body {
 
 li {
   list-style-type: none;
+}
+
+.token-x {
+  background-image: url(/img/Token-X.svg);
+  transition: background-image 0.3;
+}
+.token-O {
+  background-image: url(/img/Token-O.svg);
 }
