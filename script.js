@@ -140,12 +140,12 @@ function gameLogic() {
         }
         displayScore();
         displayPanel(moveDetails.currentPlayer, "win");
-        setTimeout(reset, 3000);
+        setTimeout(reset, 2570);
       } else if (draw(board)) {
         drawScore++;
         displayScore();
         displayPanel("", "draw");
-        setTimeout(reset, 3000);
+        setTimeout(reset, 2570);
       }
     }
   });
@@ -175,7 +175,7 @@ function reset() {
       item.classList.remove("token-X", "token-O");
     });
     playGame();
-  }, 3000);
+  }, 2570);
 }
 function newGame() {
   const button = document.querySelector("#newGame");
