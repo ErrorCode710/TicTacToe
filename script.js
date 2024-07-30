@@ -12,6 +12,7 @@ let playerO = 0;
 let drawScore = 0;
 let board;
 let move;
+let gameOver = false;
 function displayScore() {
   const x = document.querySelector("#playerXScore");
   const o = document.querySelector("#playerOScore");
@@ -34,6 +35,10 @@ function displayPanel(currentPlayer, result = "") {
       display.textContent = `X's turn`;
     }
   }
+}
+function addSoundEffect() {
+  const sound = document.querySelector("#token-sound");
+  sound.play();
 }
 function setUpBoard() {
   const row = 3;
@@ -90,6 +95,7 @@ function insertToken(board, row, col, tok) {
     // Check if the cell is empty
     board[row][col] = tok; // Insert the token
     console.log(`Token '${tok}' placed at row ${row}, column ${col}`);
+    addSoundEffect();
     return true; // Return true if the token is inserted
   } else {
     console.log(`Hey!`);
@@ -121,16 +127,22 @@ function gameLogic() {
 
   const container = document.querySelector(".board");
   container.addEventListener("click", (event) => {
+    if (gameOver) return;
     if (event.target.classList.contains("grid-item")) {
       const row = parseInt(event.target.dataset.row, 10);
       const col = parseInt(event.target.dataset.col, 10);
 
       const moveDetails = getMoveDetails(row, col);
+
       if (moveDetails.currentPlayer) {
-        event.target.classList.add(`token-${moveDetails.currentPlayer}`);
+        event.target.classList.add(
+          `token-${moveDetails.currentPlayer}`,
+          `unclickable`
+        );
         displayPanel(moveDetails.currentPlayer);
       }
       if (moveDetails.currentPlayer && winConditions(board)) {
+        event.preventDefault();
         if (moveDetails.currentPlayer === "X") {
           playerX++;
           displayPanel("You Win X");
@@ -138,14 +150,17 @@ function gameLogic() {
           playerO++;
           displayPanel("You Win O");
         }
+
         displayScore();
+        gameOver = true;
         displayPanel(moveDetails.currentPlayer, "win");
-        setTimeout(reset, 1750);
+        setTimeout(reset, 800);
       } else if (draw(board)) {
         drawScore++;
         displayScore();
+        gameOver = true;
         displayPanel("", "draw");
-        setTimeout(reset, 1750);
+        setTimeout(reset, 800);
       }
     }
   });
@@ -163,19 +178,19 @@ function playGame() {
   displayPanel("O");
   gameLogic();
 }
+
 function reset() {
   displayPanel("");
 
-  setTimeout(() => {
-    board = setUpBoard();
-    const container = document.querySelector(".board");
-    const grid = container.querySelectorAll(".grid-item");
+  board = setUpBoard();
+  const container = document.querySelector(".board");
+  const grid = container.querySelectorAll(".grid-item");
 
-    grid.forEach((item) => {
-      item.classList.remove("token-X", "token-O");
-    });
-    playGame();
-  }, 1750);
+  grid.forEach((item) => {
+    item.classList.remove("token-X", "token-O", `unclickable`);
+  });
+  gameOver = false;
+  playGame();
 }
 function newGame() {
   const button = document.querySelector("#newGame");
