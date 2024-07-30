@@ -2,6 +2,8 @@
 
 This is a simple Tic Tac Toe game implemented in JavaScript. It allows two players to play against each other on a 3x3 board. The game keeps track of player scores and detects win or draw conditions.
 
+Live Preview: https://cozy-heliotrope-5fa5fc.netlify.app/
+
 ## Table of Contents
 
 - [Features](#features)
